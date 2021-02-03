@@ -26,7 +26,7 @@ const pathBackup2 = fm.joinPath(docDir, "News Widget Backup2.js")
 let alertMsg = "No Message"
 
 try {
-  const latestVersion = await new Request("https://raw.githubusercontent.com/Saudumm/scriptable-News-Widget/main/News%20Widget.js").loadString();
+  const latestVersion = await new Request("https://raw.githubusercontent.com/Saudumm/scriptable-News-Widget/main/RSSWidget.js").loadString();
   
   if (fm.fileExists(pathBackup2)) {await fm.remove(pathBackup2);}
 
