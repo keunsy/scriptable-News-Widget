@@ -2,7 +2,7 @@
 
 var SETTINGS_FILE = "none";
 
-var CHECK_FOR_SCRIPT_UPDATE = true;
+var CHECK_FOR_SCRIPT_UPDATE = false;
 
 var PARAM_LINKS =
 [
@@ -2269,7 +2269,7 @@ async function settingsWizard() {
     function _getStandardSettings() {
       const jsonData = `
       {
-        "CHECK_FOR_SCRIPT_UPDATE": true,
+        "CHECK_FOR_SCRIPT_UPDATE": false,
         "PARAM_LINKS": [
                           ["https://rsshub.app/rsshub/routes", "rss"]
                         ],
