@@ -385,7 +385,7 @@ async function getData() {
             await aData.push([postDateSort, postDate+"|||"+postTitle+"|||"+postURL+"|||"+postIMGURL+"|||"+PARAM_LINKS[iLink][1]]);
           }
         } catch(err) {
-         log("try processing WP-JSON: "+err);
+         log("try processing JSON: "+err);
         }
       } else if (whatToLoad.loadFormat == "RSS") {
         // RSS Feeds
@@ -880,6 +880,9 @@ async function loadSettingsFromFile(strFileName) {
     
     let filePath = fmSettings.documentsDirectory();
     filePath = fmSettings.joinPath(filePath, "News-Widget-Settings");
+    if(strFileName.indexOf("txt")==-1){
+       strFileName+=".txt"
+    }
     filePath = fmSettings.joinPath(filePath, strFileName);
     
     if (fmSettings.fileExists(filePath) && fmSettings.isFileStoredIniCloud(filePath)) {
@@ -1630,7 +1633,7 @@ async function settingsWizard() {
     if (jsonData !== undefined) {
       await createTable();
     } else {
-      const alErr = await _createNewAlert("Couldn't load Settings Data. Please try again.");
+      const alErr = await _createNewAlert("无法加载配置文件");
       alErr.addAction("OK");
       await alErr.presentSheet();
       return;
@@ -1649,7 +1652,7 @@ async function settingsWizard() {
       // Create or recreate all Rows
       async function _reCreateRows() {
         const rowTitle = new UITableRow();
-        rowTitle.addText("Tap on the Settings to edit their values!\n\nTap \"SAVE\" when you're done").centerAligned();
+        rowTitle.addText("点击修改!\n\n点击 \"保存\" 当你完成后").centerAligned();
         rowTitle.height = 90;
         tblSettings.addRow(rowTitle);
         
@@ -1661,12 +1664,12 @@ async function settingsWizard() {
         rowSave.onSelect = async () => {
           let isWritten = await _saveSettings();
           if (isWritten == true) {
-            let alDone = await _createNewAlert("Settings File successfully saved!\nYou can now close the Settings Wizard (Top Left) and configure\n\n"+settingsFileName+"\n\nas a Widget Parameter or in the News Widget Code.");
+            let alDone = await _createNewAlert("保存成功!\n你现在可以用\n\n"+settingsFileName+"\n\n作为参数使用");
             alDone.addAction("OK");
             await alDone.presentAlert();
             return;
           } else {
-            let alDone = await _createNewAlert("No Settings File saved.");
+            let alDone = await _createNewAlert("无文件保存");
             alDone.addAction("OK");
             await alDone.presentAlert();
             return;
@@ -1760,18 +1763,21 @@ async function settingsWizard() {
     
     /* === Settings Wizard internal functions === */
     async function _saveSettings() {
-      let alertSave = await _createNewAlert("Enter the Filename of your Settings File including the Extension (.txt)");
-      alertSave.addTextField("filename.txt", settingsFileName);
-      alertSave.addAction("Save");
-      alertSave.addCancelAction("Cancel");
+      let alertSave = await _createNewAlert("输入文件名)");
+      alertSave.addTextField("filename.txt", "");
+      alertSave.addAction("保存");
+      alertSave.addCancelAction("取消");
       switch (await alertSave.presentAlert()) {
         case 0:
-          if (alertSave.textFieldValue(0).length > 0 && alertSave.textFieldValue(0).slice(-4) == ".txt") {
+          if (alertSave.textFieldValue(0).length > 0") {
             settingsFileName = alertSave.textFieldValue(0);
+            if(settingsFileName.indexOf("txt")==-1){
+             settingsFileName += ".txt"
+            }
             settingsFileName = settingsFileName.replaceAll(/[\?\|&;\$%@"<>\(\)\+,]/g, "");
             let filePathWrite = fm.joinPath(filePath, settingsFileName);
             if (fm.fileExists(filePathWrite)) {
-              let alertOverwrite = await _createNewAlert("The File \""+settingsFileName+"\" already exists.\nDo you want to overwrite the File?");
+              let alertOverwrite = await _createNewAlert("文件 \""+settingsFileName+"\" 已存在.\n你要覆盖该文件么?");
               alertOverwrite.addAction("No");
               alertOverwrite.addAction("Yes");
               switch (await alertOverwrite.presentAlert()) {
