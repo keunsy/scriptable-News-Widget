@@ -2,7 +2,7 @@
 
 var SETTINGS_FILE = "none";
 
-var CHECK_FOR_SCRIPT_UPDATE = false;
+var CHECK_FOR_SCRIPT_UPDATE = true;
 
 var PARAM_LINKS =
 [
@@ -2263,24 +2263,38 @@ async function settingsWizard() {
     function _getStandardSettings() {
       const jsonData = `
       {
-        "CHECK_FOR_SCRIPT_UPDATE": CHECK_FOR_SCRIPT_UPDATE,
+        "CHECK_FOR_SCRIPT_UPDATE": true,
         "PARAM_LINKS": [
-                        ["https://rsshub.app/rsshub/routes", "url"]
+                          ["https://rsshub.app/rsshub/routes", "RSSHub"],
                         ],
-        "PARAM_WIDGET_TITLE": PARAM_WIDGET_TITLE,
-        "PARAM_BG_IMAGE_NAME": PARAM_BG_IMAGE_NAME,
-        "PARAM_BG_IMAGE_BLUR": PARAM_BG_IMAGE_BLUR,
-        "PARAM_BG_IMAGE_GRADIENT": PARAM_BG_IMAGE_GRADIENT,
-        "PARAM_SHOW_NEWS_IMAGES": PARAM_SHOW_NEWS_IMAGES,
-        "CONF_LARGE_WIDGET_MAX_NEWS": CONF_LARGE_WIDGET_MAX_NEWS,
-        "CONF_DISPLAY_NEWS": CONF_DISPLAY_NEWS,
-        "CONF_DATE_TIME_LOCALE": CONF_DATE_TIME_LOCALE,
-        "CONF_12_HOUR": CONF_12_HOUR,
-        "CONF_BG_COLOR": CONF_BG_COLOR,
-        "CONF_BG_GRADIENT": CONF_BG_GRADIENT,
-        "CONF_BG_GRADIENT_COLOR_TOP": CONF_BG_GRADIENT_COLOR_TOP,
-        "CONF_BG_GRADIENT_COLOR_BTM": CONF_BG_GRADIENT_COLOR_BTM,
-        "CONF_BG_GRADIENT_OVERLAY_TOP": CONF_BG_GRADIENT_OVERLAY_TOP,
+        "PARAM_WIDGET_TITLE": "rss",
+        "PARAM_BG_IMAGE_NAME": "none",
+        "PARAM_BG_IMAGE_BLUR": "true",
+        "PARAM_BG_IMAGE_GRADIENT": "true",
+        "PARAM_SHOW_NEWS_IMAGES": "true",
+        "CONF_LARGE_WIDGET_MAX_NEWS": 5,
+        "CONF_DISPLAY_NEWS": "websites",
+        "CONF_DATE_TIME_LOCALE": "default",
+        "CONF_12_HOUR": false,
+        "CONF_BG_COLOR": {
+          "lightMode": "#fefefe",
+          "darkMode": "#2c2c2e"
+        },
+        "CONF_BG_GRADIENT": false,
+        "CONF_BG_GRADIENT_COLOR_TOP": {
+          "lightMode": "#fefefe",
+          "darkMode": "#000000"
+        },
+        "CONF_BG_GRADIENT_COLOR_BTM": {
+          "lightMode": "#cccccc",
+          "darkMode": "#2c2c2e"
+        },
+        "CONF_BG_GRADIENT_OVERLAY_TOP": {
+          "lightMode": "#fefefe",
+          "lightModeAlpha": 0.3,
+          "darkMode": "#2c2c2e",
+          "darkModeAlpha": 0.3
+        },
         "CONF_BG_GRADIENT_OVERLAY_BTM": {
           "lightMode": "#fefefe",
           "lightModeAlpha": 1.0,
@@ -2296,7 +2310,7 @@ async function settingsWizard() {
         },
         "CONF_FONT_DATE" : "System",
         "CONF_FONT_WEIGHT_DATE": "heavy",
-        "CONF_FONT_SIZE_DATE": 14,
+        "CONF_FONT_SIZE_DATE": 15,
         "CONF_FONT_COLOR_DATE": {
           "lightMode": "#8a8a8d",
           "darkMode" : "#9f9fa4"
