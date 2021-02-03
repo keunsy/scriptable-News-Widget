@@ -1764,7 +1764,7 @@ async function settingsWizard() {
     /* === Settings Wizard internal functions === */
     async function _saveSettings() {
       let alertSave = await _createNewAlert("输入文件名)");
-      alertSave.addTextField("filename.txt", "");
+      alertSave.addTextField("filename.txt",settingsFileName);
       alertSave.addAction("保存");
       alertSave.addCancelAction("取消");
       switch (await alertSave.presentAlert()) {
