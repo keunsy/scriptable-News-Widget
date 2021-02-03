@@ -680,7 +680,7 @@ async function getData() {
     
     if (ONLINE) {
       //进行了更改，后续如果只保留rss则省却(todo wpjson可能不符合规范)
-      if (strSiteName == "rss") {
+      if (strSiteName == "rss" || link.indexOf("rss") != -1) {
         loadFormat = "RSS";
         loadFilePath = pathBackupJSON;
       } else {
