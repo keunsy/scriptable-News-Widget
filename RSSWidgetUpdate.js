@@ -1,5 +1,4 @@
-
- let fm
+let fm
 try {fm = FileManager.iCloud()} catch (err) {fm = FileManager.local()}
 try {fm.documentsDirectory()} catch(e) {fm = FileManager.local()}
 
