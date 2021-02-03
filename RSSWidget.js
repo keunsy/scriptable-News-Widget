@@ -1,275 +1,65 @@
-// Variables used by Scriptable.
-// These must be at the very top of the file. Do not edit.
-// icon-color: blue; icon-glyph: file-alt;
-/********************************************
- *                                          *
- *      NEWS WIDGET (WORDPRESS AND RSS)     *
- *                                          *
- *        v1.2.1 - made by @saudumm         *
- *       https://twitter.com/saudumm        *
- *                                          *
- ********************************************
- 
- Feel free to contact me on Twitter or
- GitHub, if you have any questions or issues.
+/* ============ 配置区============ */
 
- GitHub Repo:
- https://github.com/Saudumm/scriptable-News-Widget
- 
- ********************************************
- *                                          *
- *     INSTRUCTIONS / MANUAL / CHANGELOG    *
- *   For instructions on how to set up the  *
- *     widget and the latest changes to     *
- *        the script please check the       *
- *               GitHub Repo                *
- *                                          *
- *             DOWNLOAD UPDATES             *
- *    To update News Widget  or download    *
- *     the latest version of the script     *
- *    check out  "News Widget Update.js"    *
- *            in my GitHub Repo             *
- *    Just add "News Widget Update.js" to   *
- *   Scriptable and run it to download the  *
- *      latest version of News Widget!      *
- *                                          *
- ********************************************
-
- WIDGET PARAMETERS: you can long press on the
- widget on your homescreen and edit
- parameters
-
- Please run Settings Wizard, configure
- everything to your liking and then set the
- name of the Settings File as a
- Widget Parameter.
-*/
-
-/* ============ CONFIG  START ============ */
-
-/*******************************************/
-/*                                         */
-/*               CONFIG FILE               */
-/*                                         */
-/*  You can store your preferred settings  */
-/*   in a config file in the Scriptables   */
-/*    directory in your Files App. This    */
-/*   config file can then be loaded and    */
-/*      used to overwrite the various      */
-/*   settings below, so you don't have to  */
-/*  constantly change them when the widget */
-/*    code is updated. You can even use    */
-/*     different config files as widget    */
-/*      parameter to create different      */
-/*              widget styles!             */
-/*                                         */
-/*   Check the GitHub Repo for more info   */
-/*           and an example file           */
-/*                                         */
-/*******************************************/
-
-// set to "none" if you don't want to use a
-// settings file or if you want to use a
-// settings file via widget parameter
 var SETTINGS_FILE = "none";
 
-/*******************************************/
-/*                                         */
-/*         CHECK FOR SCRIPT UDPATE         */
-/*                                         */
-/*******************************************/
+var CHECK_FOR_SCRIPT_UPDATE = false;
 
-// Check for script updates and get notified
-// as soon as a new version is released
-// true = check for script updates
-// false = don't check for updates
-var CHECK_FOR_SCRIPT_UPDATE = true;
-
-/*******************************************/
-/*                                         */
-/*         STANDARD WIDGET CONFIG          */
-/*                                         */
-/*    Everything in this section can be    */
-/*   overwritten with  Widget Parameters   */
-/*                                         */
-/*******************************************/
-
-// Add Addresses (URLs/Links) of the
-// website(s) and/or the RSS Feed(s) you want
-// to fetch posts from.
-// Format of a new line has to be:
-//
-// ["Link to site/feed", "Name of site"],
-//
-// Please note, the more sites you add, the
-// longer the widgets needs to load all data.
-// It's possible that the widget on your
-// homescreen won't load anything or takes a
-// very long time if you add too many links.
 var PARAM_LINKS =
 [
- ["https://venturebeat.com", "VENTUREBEAT"],
- ["http://rss.cnn.com/rss/edition.rss", "CNN"],
- ["https://news.google.com/rss", "GOOGLE NEWS"],
- ["https://stadt-bremerhaven.de", "CASCHYS BLOG"],
- ["https://insidexbox.de", "INSIDEXBOX"],
+ ["https://rsshub.app/rsshub/routes", "RSSHub"],
 ];
 
-// Name of the website/feed to display in the
-// widget (at the top).
-// If only one site is configured (in the
-// code or parameters), the name of the site
-// is used.
-var PARAM_WIDGET_TITLE = "News Widget";
+var PARAM_WIDGET_TITLE = "rss";
 
-// Note: custom background image files have
-// to be in the Scriptable (iCloud) Files
-// folder (same as the script .js file).
-// Change to the filename of a custom
-// background image (CASE SENSITIVE!) or set
-// to "none" if you don't want a custom image
 var PARAM_BG_IMAGE_NAME = "none";
 
-// Blur the background image (custom or the
-// news image in small widgets).
-// "true" = blur the background image
-// "false" = no blur
 var PARAM_BG_IMAGE_BLUR = "true";
 
-// "true" = gradient over the bg image
-// "false" = no gradient
 var PARAM_BG_IMAGE_GRADIENT = "true";
 
-// Note: combining
-// PARAM_SHOW_NEWS_IMAGES = true + small
-// widget will ignore CONF_BG_GRADIENT_COLOR
-// values in small config widgets.
-// "true" = display images next to headlines
-// "false" = no images next to posts
 var PARAM_SHOW_NEWS_IMAGES = "true";
 
-/*******************************************/
-/*                                         */
-/*         CONFIGURE LOOK AND FEEL         */
-/*                                         */
-/*         NOTE ON DYNAMIC COLORS:         */
-/*  the first value is used in iOS light   */
-/*   mode, second value will be used in    */
-/*                dark mode                */
-/*                                         */
-/*   Values are hexadecimal color values   */
-/*            Visit sites like             */
-/*       https://htmlcolorcodes.com        */
-/*      to find hex values for colors      */
-/*                                         */
-/*******************************************/
+var CONF_LARGE_WIDGET_MAX_NEWS = 5;
 
-// Configure if you want a maximum of four or
-// five News displayed in the LARGE Widget.
-// Please only set 4 or 5. Other values will
-// default to 4. If you have exactly
-// four websites configured in PARAM_LINKS,
-// this Setting will always default to 4.
-var CONF_LARGE_WIDGET_MAX_NEWS = 4;
-
-// Configure how posts should be displayed
-// in the widget.
-// Set to "websites" if you want to
-// prioritize seeing news from all your
-// configured websites. This will more
-// closely resemble the iOS News Widget.
-// Set to "date" if you want to
-// prioritize just sorting by date. This will
-// more closely resemble a timeline or feed
-// of all configured websites combined.
 var CONF_DISPLAY_NEWS = "websites";
 
-// Configure your preferred region to format
-// how date and time values will be displayed
-// "default" = uses your system region
-// Use locales shortcodes like "en-US",
-// "en-GB", "ko", "fr-CA" or "de-DE"
-// For a list of possible iOS locales, see:
-// https://gist.github.com/jacobbubu/1836273
 var CONF_DATE_TIME_LOCALE = "default";
 
-// Configure which time format to use
-// true = 12h time format
-// false = 24h time format
 var CONF_12_HOUR = false;
 
-// Set the background color of your widget
 var CONF_BG_COLOR =
     Color.dynamic(
       new Color("#fefefe"),
       new Color("#2c2c2e")
     );
 
-// Configure to use a color gradient instead
-// of the single background color (above)
-// true = use a color gradient
-// - (colors configured below)
-// false = use a single color
-// - (color configured above)
 var CONF_BG_GRADIENT = false;
 
-// gradient color from the top of the widget
 var CONF_BG_GRADIENT_COLOR_TOP =
     Color.dynamic(
       new Color("#fefefe"),
       new Color("#000000")
     );
-// gradient color to the bottom of the widget
+
 var CONF_BG_GRADIENT_COLOR_BTM =
     Color.dynamic(
       new Color("#cccccc"),
       new Color("#2c2c2e")
     );
 
-// gradient color image overlay from the top
-// of the widget
-// used if a background image is displayed
-// and PARAM_BG_IMAGE_GRADIENT = "true"
+
 var CONF_BG_GRADIENT_OVERLAY_TOP =
       Color.dynamic(
         new Color("#fefefe", 0.3),
         new Color("#2c2c2e", 0.3)
       );
-// gradient color image overlay to the bottom
-// of the widget
-// used if a background image is displayed
-// and PARAM_BG_IMAGE_GRADIENT = "true"
+
 var CONF_BG_GRADIENT_OVERLAY_BTM =
       Color.dynamic(
         new Color("#fefefe", 1.0),
         new Color("#2c2c2e", 1.0)
       );
 
-/*******************************************/
-/*                                         */
-/*          TEXT FONTS  AND SIZES          */
-/*                                         */
-/*             NOTE ON FONTS:              */
-/*   Use "System" if you want to use the   */
-/*     system font (SF Pro), "Rounded"     */
-/*       for a rounded system font,        */
-/*  "Monospaced" for a monosopaced system  */
-/*    font and choose your font weight.    */
-/*                                         */
-/*        Font weight options are:         */
-/*    ultralight, thin, light, regular,    */
-/*  medium, semibold, bold, heavy, black   */
-/*                                         */
-/*                                         */
-/*   Refer to http://iosfonts.com if you   */
-/*   want to use other fonts and replace   */
-/*    System withyour chosen font name     */
-/*  (e.g. Copperplate or Copperplate-Bold) */
-/*                                         */
-/*******************************************/
-
-// Set the font, size and text color of the
-// widget title at the top of the widget
 var CONF_FONT_WIDGET_TITLE = "System";
 var CONF_FONT_WEIGHT_WIDGET_TITLE = "heavy";
 var CONF_FONT_SIZE_WIDGET_TITLE = 16;
@@ -279,8 +69,6 @@ var CONF_FONT_COLOR_WIDGET_TITLE =
         new Color("#fefefe")
       );
 
-// Set the font, size and text color of the
-// date and time line(s) in the widget
 var CONF_FONT_DATE = "System";
 var CONF_FONT_WEIGHT_DATE = "heavy";
 var CONF_FONT_SIZE_DATE = 12;
@@ -290,8 +78,6 @@ var CONF_FONT_COLOR_DATE =
         new Color("#9f9fa4")
       );
 
-// Set the font, size and text color of the
-// news headlines in the widget
 var CONF_FONT_HEADLINE = "System";
 var CONF_FONT_WEIGHT_HEADLINE = "semibold";
 var CONF_FONT_SIZE_HEADLINE = 13;
@@ -301,46 +87,41 @@ var CONF_FONT_COLOR_HEADLINE =
         new Color("#fefefe")
       );
 
-/* ============= CONFIG  END ============= */
+/* ============ 配置区end============ */
 
-/*******************************************/
-/*                                         */
-/*      DO NOT CHANGE ANYTHING BELOW!      */
-/*       (or do so at your own risk)       */
-/*                                         */
-/*******************************************/
+/* ============ 运行区start============ */
 
+//检查是否可更新脚本
 const ONLINE = await isOnline();
-
-// check for updates
 var UPDATE_AVAILABLE = false;
 if (ONLINE && CHECK_FOR_SCRIPT_UPDATE === true) {UPDATE_AVAILABLE = await checkForUpdate("v1.2.1");}
 
 // define default size of widget
 var WIDGET_SIZE = (config.runsInWidget ? config.widgetFamily : "large");
 
-// process widget parameters
+// 检查并获取参数配置，支持多个参数，注意顺序
 await checkWidgetParameter();
 
-// load settings if a file is configured
+// 从文件加载配置，否则使用默认
 if (SETTINGS_FILE != "none") {await loadSettingsFromFile(SETTINGS_FILE);}
 
-// set the number of posts depending on WIDGET_SIZE
+// 设置显示条数
 var WIDGET_NEWS_COUNT = (WIDGET_SIZE == "small") ? 1 : (WIDGET_SIZE == "medium") ? 2 : 5;
 if (CONF_LARGE_WIDGET_MAX_NEWS < 4 || CONF_LARGE_WIDGET_MAX_NEWS > 5) {CONF_LARGE_WIDGET_MAX_NEWS = 4;}
 
-// check directories
+// 创建文件夹
 await checkFileDirs();
-
+// 清理超过7天的图片缓存
 await cleanUpCache();
 
+//在scriptable中运行，进行配置
 if (config.runsInApp) {
   let welcomeAlert = await new Alert();
-  welcomeAlert.title = "News Widget";
-  welcomeAlert.message = "Welcome and THANK YOU for using News Widget!\nDo you want to run the Settings Wizard or Preview the Widget?";
-  welcomeAlert.addAction("Run Settings Wizard");
-  welcomeAlert.addAction("Preview Widget");
-  welcomeAlert.addCancelAction("Cancel");
+  welcomeAlert.title = "RSSWidget";
+  welcomeAlert.message = "请选择配置或者预览";
+  welcomeAlert.addAction("配置");
+  welcomeAlert.addAction("预览");
+  welcomeAlert.addCancelAction("取消");
   
   switch (await welcomeAlert.presentSheet()) {
       case 0: await settingsWizard(); return;
@@ -349,10 +130,8 @@ if (config.runsInApp) {
   }
 }
 
-// create widget
+// 创建并运行
 const widget = await createWidget();
-
-// show widget if run in app
 if (!config.runsInWidget) {
   switch (WIDGET_SIZE) {
     case "small": await widget.presentSmall(); break;
@@ -360,27 +139,25 @@ if (!config.runsInWidget) {
     case "large": await widget.presentLarge(); break;
   }
 }
-
-// set widget and end script
 Script.setWidget(widget);
 Script.complete();
 
+/* ============ 运行区end============ */
 
-/* ============== FUNCTIONS ============== */
-
-// create the widget
+/* ============== 方法区start============== */
 async function createWidget() {
   const fontWidgetTitle = await loadFont(CONF_FONT_WIDGET_TITLE, CONF_FONT_WEIGHT_WIDGET_TITLE, CONF_FONT_SIZE_WIDGET_TITLE);
   const fontDate = await loadFont(CONF_FONT_DATE, CONF_FONT_WEIGHT_DATE, CONF_FONT_SIZE_DATE);
   const fontHeadline = await loadFont(CONF_FONT_HEADLINE, CONF_FONT_WEIGHT_HEADLINE, CONF_FONT_SIZE_HEADLINE);
-  
+  //单网站模式
   const singleSiteMode = (PARAM_LINKS.length == 1 ? true : false);
   
   const list = new ListWidget();
   
+  //获取数据
   const widgetNewsData = await getData();
   
-  // Display the title of the widget
+  // 设置显示标题
   const titleStack = list.addStack();
   titleStack.layoutHorizontally();
 
@@ -450,7 +227,7 @@ async function createWidget() {
       labelHeadline.lineLimit = 3;
       
       list.url = widgetNewsData.aNewsURLs[0];
-    } else {
+    } else { //多条数据的情况
       list.setPadding(16, 16, 16, 16);
       
       const aStackRow = await new Array(WIDGET_NEWS_COUNT);
@@ -479,6 +256,7 @@ async function createWidget() {
         aLblNewsHeadline[i].textColor = CONF_FONT_COLOR_HEADLINE;
         aLblNewsHeadline[i].lineLimit = 2;
 
+        // 配置缩略图
         if (PARAM_SHOW_NEWS_IMAGES == "true") {
           aStackRow[i].addSpacer();
           aLblNewsImage[i] = aStackRow[i].addImage(await loadLocalImage(widgetNewsData.aNewsIMGPaths[i]));
@@ -505,8 +283,8 @@ async function createWidget() {
     sadFace.minimumScaleFactor = 0.1;
     
     list.addSpacer();
-    
-    const errMsg = list.addText("Couldn't load data");
+    //todo 可以把错误原因显示此处
+    const errMsg = list.addText("无法加载数据");
     errMsg.font = Font.regularSystemFont(12);
     errMsg.textColor = Color.white();
     
@@ -527,7 +305,7 @@ async function createWidget() {
     updateMsg.url = "https://github.com/Saudumm/scriptable-News-Widget"
   }
   
-  // widget background (image, single color or gradient)
+  // 背景配置 (image, single color or gradient)
   if (PARAM_BG_IMAGE_NAME != "none") {
     const customBGImage = await loadBGImage(PARAM_BG_IMAGE_NAME, PARAM_BG_IMAGE_BLUR);
     if (customBGImage != "not found") {
@@ -561,22 +339,22 @@ async function getData() {
     const aData = await new Array();
     
     for (iLink = 0; iLink < PARAM_LINKS.length; iLink++) {
-      // add https:// to the link if it's missing
+      // 手动补全网站地址
       if (PARAM_LINKS[iLink][0].substring(0, 7) != "http://" && PARAM_LINKS[iLink][0].substring(0, 8) != "https://") {
         PARAM_LINKS[iLink][0] = "https://"+PARAM_LINKS[iLink][0]
       }
-      // remove last / from link
+      // 去除最后一个 /
       if (PARAM_LINKS[iLink][0].slice(-1) == "/") {PARAM_LINKS[iLink][0] = PARAM_LINKS[iLink][0].slice(0, -1);}
 
       const whatToLoad = await _whatShouldILoad(PARAM_LINKS[iLink][0], PARAM_LINKS[iLink][1])
 
-      if (whatToLoad.loadFormat == "WP-JSON") {
-        // WordPress JSON
+      if (whatToLoad.loadFormat == "JSON") {
+        // JSON
         try {
           let loadedJSON
           if (ONLINE) {
-            loadedJSON = await new Request(PARAM_LINKS[iLink][0]+"/wp-json/wp/v2/posts?per_page=5").loadJSON();
-            // Save data to file
+            loadedJSON = await new Request(PARAM_LINKS[iLink][0]).loadJSON();
+            // 保存数据到文件中
             await localFM.writeString(whatToLoad.loadFilePath, JSON.stringify(loadedJSON));
           } else {
             loadedJSON = await JSON.parse(localFM.readString(whatToLoad.loadFilePath));
@@ -889,7 +667,7 @@ async function getData() {
     return null;
   }
   
-  // define what sould be loaded depending on link and online status
+  // 根据网络状态加载对应内容
   async function _whatShouldILoad(link, strSiteName) {
     let loadFormat = "none";
     let loadFilePath = "none";
@@ -901,16 +679,17 @@ async function getData() {
     const pathBackupXML = localFM.joinPath(docDir+"/saudumm-news-widget-data", backupFilename+".xml");
     
     if (ONLINE) {
-      if (await isJSON(link+"/wp-json/wp/v2/posts?per_page=1")) {
-        loadFormat = "WP-JSON";
+      //进行了更改，后续如果只保留rss则省却(todo wpjson可能不符合规范)
+      if (strSiteName == "rss") {
+        loadFormat = "RSS";
         loadFilePath = pathBackupJSON;
       } else {
-        loadFormat = "RSS";
+        loadFormat = "JSON";
         loadFilePath = pathBackupXML;
       }
     } else {
       if (localFM.fileExists(pathBackupJSON)) {
-        loadFormat = "WP-JSON";
+        loadFormat = "JSON";
         loadFilePath = pathBackupJSON;
       } else if (localFM.fileExists(pathBackupXML)) {
         loadFormat = "RSS";
@@ -1778,7 +1557,7 @@ async function cropImageToSquare(img) {
   return img;
 }
 
-// settings wizard
+// 进行配置
 async function settingsWizard() {
   try {
     let fm;
@@ -1790,21 +1569,22 @@ async function settingsWizard() {
     let settingsFileName = "widget-settings.txt";
     let jsonData;
     
-    const alAddEdit = await _createNewAlert("Welcome to News Widget Settings Wizard\nDo you want to create a new Settings File or edit an exisiting file?");
-    alAddEdit.addAction("Create New File");
-    alAddEdit.addAction("Edit Existing File");
-    alAddEdit.addAction("Delete Existing File");
-    alAddEdit.addCancelAction("Cancel");
+    const alAddEdit = await _createNewAlert("创建新配置或者更改已有配置");
+
+    alAddEdit.addAction("创建配置");
+    alAddEdit.addAction("修改配置");
+    alAddEdit.addAction("删除配置文件");
+    alAddEdit.addCancelAction("取消");
     
     switch (await alAddEdit.presentSheet()) {
       case 0: jsonData = await _getStandardSettings(); break;
       case 1:
         const settingsContent = fm.listContents(filePath)
         settingsContent.sort();
-        const alLoad = await _createNewAlert("Select which Settings File you want to edit:");
+        const alLoad = await _createNewAlert("选择要修改的文件:");
         if (settingsContent && settingsContent.length > 0) {
           for (let iLoad = 0; iLoad < settingsContent.length; iLoad++) {alLoad.addAction(settingsContent[iLoad]);}
-          alLoad.addCancelAction("Cancel");
+          alLoad.addCancelAction("取消");
           const answerLoad = await alLoad.presentSheet();
           if (answerLoad > -1) {
             settingsFileName = settingsContent[answerLoad]
@@ -1818,10 +1598,10 @@ async function settingsWizard() {
         break;
       case 2:
         const settingsContentDel = fm.listContents(filePath)
-        const alDel = await _createNewAlert("Select which Settings File you want to delete:");
+        const alDel = await _createNewAlert("选择要删除的文件:");
         if (settingsContentDel && settingsContentDel.length > 0) {
           for (let iDel = 0; iDel < settingsContentDel.length; iDel++) {alDel.addAction(settingsContentDel[iDel]);}
-          alDel.addCancelAction("Cancel");
+          alDel.addCancelAction("取消");
           const answerDel = await alDel.presentSheet();
           if (answerDel > -1) {
             const settingsFileNameDel = settingsContentDel[answerDel]
@@ -2479,43 +2259,28 @@ async function settingsWizard() {
       };
     }
     
-    // load standard settings
+    // 加载标准配置（todo 可以直接使用默认值，避免重复）
     function _getStandardSettings() {
       const jsonData = `
       {
-        "CHECK_FOR_SCRIPT_UPDATE": true,
+        "CHECK_FOR_SCRIPT_UPDATE": CHECK_FOR_SCRIPT_UPDATE,
         "PARAM_LINKS": [
-                        ["https://venturebeat.com", "VENTUREBEAT"],
-                        ["http://rss.cnn.com/rss/edition.rss", "CNN"]
+                        ["https://rsshub.app/rsshub/routes", "url"]
                         ],
-        "PARAM_WIDGET_TITLE": "News Widget",
-        "PARAM_BG_IMAGE_NAME": "none",
-        "PARAM_BG_IMAGE_BLUR": "true",
-        "PARAM_BG_IMAGE_GRADIENT": "true",
-        "PARAM_SHOW_NEWS_IMAGES": "true",
-        "CONF_LARGE_WIDGET_MAX_NEWS": 4,
-        "CONF_DISPLAY_NEWS": "websites",
-        "CONF_DATE_TIME_LOCALE": "default",
-        "CONF_12_HOUR": false,
-        "CONF_BG_COLOR": {
-          "lightMode": "#fefefe",
-          "darkMode": "#2c2c2e"
-        },
-        "CONF_BG_GRADIENT": false,
-        "CONF_BG_GRADIENT_COLOR_TOP": {
-          "lightMode": "#fefefe",
-          "darkMode": "#000000"
-        },
-        "CONF_BG_GRADIENT_COLOR_BTM": {
-          "lightMode": "#cccccc",
-          "darkMode": "#2c2c2e"
-        },
-        "CONF_BG_GRADIENT_OVERLAY_TOP": {
-          "lightMode": "#fefefe",
-          "lightModeAlpha": 0.3,
-          "darkMode": "#2c2c2e",
-          "darkModeAlpha": 0.3
-        },
+        "PARAM_WIDGET_TITLE": PARAM_WIDGET_TITLE,
+        "PARAM_BG_IMAGE_NAME": PARAM_BG_IMAGE_NAME,
+        "PARAM_BG_IMAGE_BLUR": PARAM_BG_IMAGE_BLUR,
+        "PARAM_BG_IMAGE_GRADIENT": PARAM_BG_IMAGE_GRADIENT,
+        "PARAM_SHOW_NEWS_IMAGES": PARAM_SHOW_NEWS_IMAGES,
+        "CONF_LARGE_WIDGET_MAX_NEWS": CONF_LARGE_WIDGET_MAX_NEWS,
+        "CONF_DISPLAY_NEWS": CONF_DISPLAY_NEWS,
+        "CONF_DATE_TIME_LOCALE": CONF_DATE_TIME_LOCALE,
+        "CONF_12_HOUR": CONF_12_HOUR,
+        "CONF_BG_COLOR": CONF_BG_COLOR,
+        "CONF_BG_GRADIENT": CONF_BG_GRADIENT,
+        "CONF_BG_GRADIENT_COLOR_TOP": CONF_BG_GRADIENT_COLOR_TOP,
+        "CONF_BG_GRADIENT_COLOR_BTM": CONF_BG_GRADIENT_COLOR_BTM,
+        "CONF_BG_GRADIENT_OVERLAY_TOP": CONF_BG_GRADIENT_OVERLAY_TOP,
         "CONF_BG_GRADIENT_OVERLAY_BTM": {
           "lightMode": "#fefefe",
           "lightModeAlpha": 1.0,
@@ -2524,21 +2289,21 @@ async function settingsWizard() {
         },
         "CONF_FONT_WIDGET_TITLE": "System",
         "CONF_FONT_WEIGHT_WIDGET_TITLE": "heavy",
-        "CONF_FONT_SIZE_WIDGET_TITLE": 16,
+        "CONF_FONT_SIZE_WIDGET_TITLE": 18,
         "CONF_FONT_COLOR_WIDGET_TITLE": {
           "lightMode": "#000000",
           "darkMode" : "#fefefe"
         },
         "CONF_FONT_DATE" : "System",
         "CONF_FONT_WEIGHT_DATE": "heavy",
-        "CONF_FONT_SIZE_DATE": 12,
+        "CONF_FONT_SIZE_DATE": 14,
         "CONF_FONT_COLOR_DATE": {
           "lightMode": "#8a8a8d",
           "darkMode" : "#9f9fa4"
         },
         "CONF_FONT_HEADLINE": "System",
         "CONF_FONT_WEIGHT_HEADLINE": "semibold",
-        "CONF_FONT_SIZE_HEADLINE": 13,
+        "CONF_FONT_SIZE_HEADLINE": 16,
         "CONF_FONT_COLOR_HEADLINE": {
           "lightMode": "#000000",
           "darkMode" : "#fefefe"
