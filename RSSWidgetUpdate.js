@@ -1,27 +1,13 @@
-// Variables used by Scriptable.
-// These must be at the very top of the file. Do not edit.
-// icon-color: deep-gray; icon-glyph: sync-alt;
-/********************************************
- *                                          *
- *       UPDATE OR INSTALL NEWS WIDGET      *
- *                                          *
- *        v1.0.1 - made by @saudumm         *
- *       https://twitter.com/saudumm        *
- *                                          *
- *******************************************/
 
-// GitHub Repo:
-// https://github.com/Saudumm/scriptable-News-Widget
- 
-let fm
+ let fm
 try {fm = FileManager.iCloud()} catch (err) {fm = FileManager.local()}
 try {fm.documentsDirectory()} catch(e) {fm = FileManager.local()}
 
 const docDir = fm.documentsDirectory()
-const path = fm.joinPath(docDir, "News Widget.js")
-const pathAlt = fm.joinPath(docDir, "News-Widget.js")
-const pathBackup = fm.joinPath(docDir, "News Widget Backup.js")
-const pathBackup2 = fm.joinPath(docDir, "News Widget Backup2.js")
+const path = fm.joinPath(docDir, "RSSWidget.js")
+const pathAlt = fm.joinPath(docDir, "RSS-Widget.js")
+const pathBackup = fm.joinPath(docDir, "RSSWidgetBackup.js")
+const pathBackup2 = fm.joinPath(docDir, "RSSWidgetBackup2.js")
 
 let alertMsg = "No Message"
 
@@ -47,9 +33,9 @@ try {
   
   if (fm.fileExists(pathBackup2)) {await fm.remove(pathBackup2);}
   
-  alertMsg = "News Widget successfully updated!\n\nOld Script has been saved as\n'News Widget Backup'"
+  alertMsg = "已经更新!\n\n旧文件保存为\n'RSSWidgetBackup'"
 } catch(err) {
-  alertMsg = "Error while updateing News Widget\n\n"+err+"\n\nPlease Check 'News Widget' \nor\n'News Widget Backup'"
+  alertMsg = "更新中发生错误：\n\n"+err+"\n\n"
 }
 
 let alert = new Alert();
