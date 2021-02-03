@@ -6,7 +6,7 @@ var CHECK_FOR_SCRIPT_UPDATE = true;
 
 var PARAM_LINKS =
 [
- ["https://rsshub.app/rsshub/routes", "RSSHub"],
+ ["https://rsshub.app/rsshub/routes", "rss"],
 ];
 
 var PARAM_WIDGET_TITLE = "rss";
@@ -2271,7 +2271,7 @@ async function settingsWizard() {
       {
         "CHECK_FOR_SCRIPT_UPDATE": true,
         "PARAM_LINKS": [
-                          ["https://rsshub.app/rsshub/routes", "RSSHub"],
+                          ["https://rsshub.app/rsshub/routes", "rss"],
                         ],
         "PARAM_WIDGET_TITLE": "rss",
         "PARAM_BG_IMAGE_NAME": "none",
