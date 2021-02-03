@@ -1769,7 +1769,7 @@ async function settingsWizard() {
       alertSave.addCancelAction("取消");
       switch (await alertSave.presentAlert()) {
         case 0:
-          if (alertSave.textFieldValue(0).length > 0") {
+          if (alertSave.textFieldValue(0).length > 0) {
             settingsFileName = alertSave.textFieldValue(0);
             if(settingsFileName.indexOf("txt")==-1){
              settingsFileName += ".txt"
